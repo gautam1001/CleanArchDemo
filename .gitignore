@@ -89,3 +89,4 @@ fastlane/test_output
 
 iOSInjectionProject/
 CleanArchDemo.xcworkspace/xcuserdata/prashantgautam.xcuserdatad/UserInterfaceState.xcuserstate
+*.xcuserstate
