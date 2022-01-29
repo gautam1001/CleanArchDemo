@@ -11,10 +11,7 @@ import Domain
 public struct PostView: View {
     
     var appDI: AppDIInterface
-    @State private var selectedPostId:Int? 
     @ObservedObject var postVM: PostViewModel
-    
-    @State var detailsIsPresented: Bool = false
     
     public init(appDI: AppDIInterface, postVM:PostViewModel) {
         self.postVM = postVM
@@ -24,6 +21,10 @@ public struct PostView: View {
     public var body: some View {
         NavigationView {
             List(postVM.posts) { post in
+                NavigationLink {
+                    let detailVM = self.appDI.postDetailsDependencies(postId: post.id ?? 0)
+                    PostDetailsView(appDI: self.appDI, postDetailsVM: detailVM)
+                } label: {
                     VStack {
                         Text(post.title ?? "")
                             .font(.largeTitle)
@@ -33,17 +34,9 @@ public struct PostView: View {
                             .font(.body)
                             .multilineTextAlignment(.center)
                     }
-                .onTapGesture {
-                    self.detailsIsPresented = true
-                    self.selectedPostId = post.id
                 }
+
             }
-            .sheet(isPresented: $detailsIsPresented, content: {
-                if let id = self.selectedPostId {
-                    let detailVM = self.appDI.postDetailsDependencies(postId: id)
-                    PostDetailsView(appDI: self.appDI, postDetailsVM: detailVM)
-                }
-            })
             .navigationTitle("Posts")
         }
         .onAppear {

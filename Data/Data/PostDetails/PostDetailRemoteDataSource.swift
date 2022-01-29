@@ -38,7 +38,9 @@ public class PostDetailRemoteDataSource: PostDetailRemoteDataSourceInterface {
                 guard let postModel = try self?.coder.decode( PostModel.self, from: data) else {
                     return handler(nil)
                 }
-                handler(postModel)
+                DispatchQueue.main.async {
+                    handler(postModel)
+                }
             } catch {
                 print("Error")
             }

@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
-import Presentation
+
 
 @main
 struct CleanArchDemoApp: App {
     var body: some Scene {
         WindowGroup {
-            PostView(appDI: AppDI.shared, postVM: AppDI.shared.postDependencies())
+           //PostView(appDI: AppDI.shared, postVM: AppDI.shared.postDependencies())
+            ContentView()
         }
     }
 }

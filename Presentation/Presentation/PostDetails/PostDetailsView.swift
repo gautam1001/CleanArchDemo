@@ -28,7 +28,7 @@ struct PostDetailsView: View {
                     .multilineTextAlignment(.center)
             }
         }
-        .navigationTitle("Details")
+        .navigationBarTitle(Text("Details"), displayMode: .inline)
         .onAppear {
             self.postDetailsVM.getDetails()
         }
